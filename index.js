@@ -19,11 +19,11 @@ app.get('/', function (req, res) {
     res.send('Web service running.');
 });
 
-app.get('/product', function (req, res) {
+app.get('/products', function (req, res) {
     executeQueryDatabase.select('SELECT PRODUCT.PRODUCT_CD, PRODUCT.NAME AS NAME, PRODUCT_TYPE.NAME AS TYPE FROM PRODUCT '
         + 'INNER JOIN PRODUCT_TYPE ON PRODUCT.PRODUCT_TYPE_CD = PRODUCT_TYPE.PRODUCT_TYPE_CD', res);
 });
-app.get('/product/:id', function (req, res) {
+app.get('/products/:id/accounts', function (req, res) {
     const paramProductCd = req.params.id;
     const query = "SELECT ACCOUNT.ACCOUNT_ID, ACCOUNT.AVAIL_BALANCE, BUSINESS.NAME, INDIVIDUAL.FIRST_NAME, INDIVIDUAL.LAST_NAME FROM ACCOUNT "
         + "INNER JOIN CUSTOMER ON ACCOUNT.CUST_ID = CUSTOMER.CUST_ID "
@@ -33,7 +33,7 @@ app.get('/product/:id', function (req, res) {
     executeQueryDatabase.select(query, res);
 });
 
-app.get('/account/:id', function (req, res) {
+app.get('/accounts/:id', function (req, res) {
     const paramAccountId = req.params.id;
     const query = 'SELECT * FROM ACCOUNT WHERE ACCOUNT_ID = ' + paramAccountId;
     executeQueryDatabase.select(query, res);
